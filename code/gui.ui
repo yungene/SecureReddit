@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object class="ttk.Frame" id="mainwindow">
+    <property name="height">800</property>
+    <property name="width">1000</property>
+    <layout>
+      <property name="column">1</property>
+      <property name="columnspan">1</property>
+      <property name="propagate">True</property>
+      <property name="row">1</property>
+      <property name="rowspan">1</property>
+      <rows>
+        <row id="0">
+          <property name="weight">0</property>
+        </row>
+      </rows>
+      <columns>
+        <column id="0">
+          <property name="pad">0</property>
+          <property name="weight">0</property>
+        </column>
+        <column id="1">
+          <property name="weight">0</property>
+        </column>
+        <column id="2">
+          <property name="weight">0</property>
+        </column>
+      </columns>
+    </layout>
+    <child>
+      <object class="ttk.Frame" id="displaybox">
+        <property name="height">400</property>
+        <property name="padding">5</property>
+        <property name="width">400</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="columnspan">1</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="rowspan">3</property>
+        </layout>
+        <child>
+          <object class="ttk.Button" id="msgrefreshBtn">
+            <property name="command">on_msgrefresh_button_clicked</property>
+            <property name="text" translatable="yes">Refresh</property>
+            <layout>
+              <property name="column">1</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Text" id="decryptText">
+            <property name="background">#dae4e4</property>
+            <property name="height">20</property>
+            <property name="state">normal</property>
+            <property name="text" translatable="yes">Refresh to get decrypted messages.</property>
+            <property name="width">50</property>
+            <property name="wrap">word</property>
+            <layout>
+              <property name="column">1</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Scrollbar" id="scrollbar">
+            <property name="orient">vertical</property>
+            <layout>
+              <property name="column">2</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+              <property name="sticky">ns</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="messagebox">
+        <property name="borderwidth">2</property>
+        <property name="height">400</property>
+        <property name="padding">5</property>
+        <property name="width">400</property>
+        <layout>
+          <property name="column">2</property>
+          <property name="columnspan">1</property>
+          <property name="ipadx">5</property>
+          <property name="ipady">5</property>
+          <property name="padx">5</property>
+          <property name="pady">5</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="rowspan">1</property>
+        </layout>
+        <child>
+          <object class="ttk.Combobox" id="groupsChoice">
+            <property name="postcommand">load_in_choices</property>
+            <property name="state">readonly</property>
+            <property name="validate">none</property>
+            <bind add="" handler="group_callback" sequence="&lt;&lt;ComboboxSelected&gt;&gt;" />
+            <layout>
+              <property name="column">1</property>
+              <property name="columnspan">1</property>
+              <property name="ipadx">5</property>
+              <property name="pady">5</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+              <property name="rowspan">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="sendbutton">
+            <property name="command">on_send_button_clicked</property>
+            <property name="text" translatable="yes">Send</property>
+            <layout>
+              <property name="column">2</property>
+              <property name="columnspan">1</property>
+              <property name="propagate">True</property>
+              <property name="row">4</property>
+              <property name="rowspan">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Combobox" id="userslist">
+            <property name="state">readonly</property>
+            <property name="validate">none</property>
+            <layout>
+              <property name="column">3</property>
+              <property name="columnspan">1</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+              <property name="rowspan">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Text" id="textbox">
+            <property name="blockcursor">true</property>
+            <property name="height">4</property>
+            <property name="text" translatable="yes">Enter your message!</property>
+            <property name="width">50</property>
+            <layout>
+              <property name="column">1</property>
+              <property name="columnspan">3</property>
+              <property name="pady">5</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+              <property name="rowspan">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="sendlabel">
+            <layout>
+              <property name="column">3</property>
+              <property name="propagate">True</property>
+              <property name="row">4</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="groupbox">
+        <property name="height">400</property>
+        <property name="padding">5</property>
+        <property name="width">400</property>
+        <bind add="True" handler="callback" sequence="&lt;1&gt;" />
+        <layout>
+          <property name="column">2</property>
+          <property name="columnspan">1</property>
+          <property name="ipadx">5</property>
+          <property name="ipady">5</property>
+          <property name="padx">5</property>
+          <property name="pady">5</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+          <property name="rowspan">1</property>
+          <rows>
+            <row id="0">
+              <property name="minsize">0</property>
+              <property name="pad">5</property>
+            </row>
+            <row id="1">
+              <property name="pad">5</property>
+            </row>
+            <row id="2">
+              <property name="pad">5</property>
+            </row>
+            <row id="3">
+              <property name="pad">5</property>
+            </row>
+          </rows>
+        </layout>
+        <child>
+          <object class="ttk.Entry" id="groupname">
+            <property name="text" translatable="yes">Group name</property>
+            <layout>
+              <property name="column">2</property>
+              <property name="columnspan">2</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+              <property name="rowspan">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="username">
+            <property name="justify">left</property>
+            <property name="text" translatable="yes">User name</property>
+            <layout>
+              <property name="column">2</property>
+              <property name="columnspan">2</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="addbutton">
+            <property name="command">on_add_button_clicked</property>
+            <property name="text" translatable="yes">Add</property>
+            <layout>
+              <property name="column">2</property>
+              <property name="propagate">True</property>
+              <property name="row">3</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="removebutton">
+            <property name="command">on_remove_button_clicked</property>
+            <property name="text" translatable="yes">Remove</property>
+            <layout>
+              <property name="column">3</property>
+              <property name="propagate">True</property>
+              <property name="row">3</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="groupsnameLabel">
+            <property name="text" translatable="yes">Group name:</property>
+            <layout>
+              <property name="column">1</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="usernameLabel">
+            <property name="text" translatable="yes">User name:</property>
+            <layout>
+              <property name="column">1</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="Frame_1">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout>
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+        <child>
+          <object class="ttk.Button" id="pubkeygenerateBtn">
+            <property name="command">on_pubkeygen_button_clicked</property>
+            <property name="text" translatable="yes">Generate Public Key</property>
+            <layout>
+              <property name="column">2</property>
+              <property name="padx">15</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="pubkeyLabel">
+            <property name="text" translatable="yes">Public key not set up!</property>
+            <layout>
+              <property name="column">1</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="pubketReminder">
+            <property name="font">{TkDefaultFont Bold} 9 {bold}</property>
+            <property name="padding">2</property>
+            <property name="text" translatable="yes">Don't forget to manually pin your key!</property>
+            <layout>
+              <property name="column">1</property>
+              <property name="columnspan">2</property>
+              <property name="ipady">5</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
